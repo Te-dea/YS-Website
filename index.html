@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云枢游戏工作室</title>
+    <!-- 基础样式 + 动效 + 响应式 -->
+    <style>
+        /* ===================== 1. 通用重置 & 工具类 ===================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* 通用工具类 - 便于快速复用 */
+        .text-center { text-align: center; }
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+        .flex-between { display: flex; align-items: center; justify-content: space-between; }
+        .gap-8 { gap: 8px; }
+        .gap-16 { gap: 16px; }
+        .gap-20 { gap: 20px; }
+        .gap-30 { gap: 30px; }
+        .py-50 { padding: 50px 0; }
+        .py-100 { padding: 100px 0; }
+
+        /* ===================== 2. 颜色系统（模块化变量） ===================== */
+        :root {
+            /* 主色：像素风深灰蓝（更现代） */
+            --primary: #283747;
+            --primary-light: #394b60;
+            --primary-dark: #1e2938;
+            
+            /* 强调色：珊瑚红（像素风，更柔和不刺眼） */
+            --secondary: #e64a19;
+            --secondary-light: #ff6737;
+            --secondary-dark: #c43a0d;
+            
+            /* 辅助色（像素风点缀） */
+            --accent-yellow: #ffc107;
+            --accent-blue: #2196f3;
+            
+            /* 中性色（梯度更细腻） */
+            --light-100: #f9fafb;
+            --light-200: #f3f4f6;
+            --light-300: #e5e7eb;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            
+            /* 动效 & 阴影 */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --shadow-xl: 0 12px 32px rgba(0,0,0,0.15);
+            --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* 导航栏高度（统一管理） */
+            --navbar-height: 70px;
+            --navbar-height-scrolled: 60px;
+        }
+
+        /* ===================== 3. 基础样式 ===================== */
+        body {
+            background-color: var(--light-100);
+            color: var(--primary);
+            line-height: 1.6;
+            position: relative;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-normal);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===================== 4. 导航栏（增强动效） ===================== */
+        header nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+            z-index: 999;
+            box-shadow: var(--shadow-md);
+            height: var(--navbar-height);
+            transition: var(--transition-normal);
+        }
+
+        nav.scrolled {
+            height: var(--navbar-height-scrolled);
+            background-color: rgba(255,255,255,0.98);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .nav-container {
+            height: 100%;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Logo动效增强：旋转+缩放+颜色渐变 */
+        .logo::before {
+            content: "";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(45deg, var(--secondary), var(--secondary-light));
+            transform: rotate(45deg);
+            transition: var(--transition-slow);
+            border-radius: 2px; /* 像素风圆角 */
+        }
+
+        .logo:hover::before {
+            transform: rotate(90deg) scale(1.15);
+            box-shadow: 0 0 10px rgba(230,74,25,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding: 4px 0;
+        }
+
+        /* 导航链接下划线动效增强 */
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent-yellow));
+            transition: var(--transition-normal);
+            border-radius: 1px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+            transition: var(--transition-fast);
+        }
+
+        .menu-toggle:hover {
+            color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        /* ===================== 5. 英雄区（像素粒子背景+增强动效） ===================== */
+        .hero {
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            padding-top: var(--navbar-height);
+            background: linear-gradient(135deg, var(--light-100) 0%, var(--light-200) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 像素粒子背景（动效增强） */
+        .hero::before, .hero::after, .hero .pixel-dot {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+            opacity: 0.12;
+        }
+
+        .hero::before {
+            width: 220px;
+            height: 220px;
+            background-color: var(--secondary);
+            top: 20%;
+            left: 10%;
+        }
+
+        .hero::after {
+            width: 160px;
+            height: 160px;
+            background-color: var(--primary);
+            bottom: 20%;
+            right: 10%;
+            animation-duration: 10s;
+            animation-direction: reverse;
+        }
+
+        /* 新增像素点装饰 */
+        .hero .pixel-dot {
+            width: 80px;
+            height: 80px;
+            background-color: var(--accent-yellow);
+            top: 60%;
+            left: 70%;
+            animation-duration: 7s;
+        }
+
+        .hero .pixel-dot:nth-child(2) {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-blue);
+            top: 30%;
+            right: 20%;
+            animation-duration: 9s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(5deg); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+            animation: fadeUp 1.2s ease-out;
+            padding: 0 20px;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            position: relative;
+        }
+
+        /* 标题文字渐变 */
+        .hero h1 span {
+            background: linear-gradient(90deg, var(--secondary), var(--accent-yellow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray-500);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        /* 按钮动效增强（脉冲+3D hover） */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(45deg, var(--secondary), var(--secondary-light));
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 按钮脉冲动效（可选激活） */
+        .btn.pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(230,74,25,0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(230,74,25,0); }
+            100% { box-shadow: 0 0 0 0 rgba(230,74,25,0); }
+        }
+
+        .btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+            background: linear-gradient(45deg, var(--secondary-dark), var(--secondary));
+        }
+
+        .btn:active {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ===================== 6. 作品展示（3D卡片动效） ===================== */
+        .works {
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.2rem;
+            position: relative;
+            color: var(--primary);
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent-yellow));
+            border-radius: 2px;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 35px;
+        }
+
+        /* 3D卡片hover动效 */
+        .work-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-slow);
+            cursor: pointer;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .work-card:hover {
+            transform: translateY(-10px) rotateY(5deg) rotateX(2deg);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .work-img {
+            width: 100%;
+            height: 200px;
+            background-color: var(--light-200);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .work-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-slow);
+        }
+
+        .work-card:hover .work-img img {
+            transform: scale(1.08) rotate(1deg);
+        }
+
+        /* 图片悬停遮罩 */
+        .work-img::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 100%);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .work-card:hover .work-img::after {
+            opacity: 1;
+        }
+
+        .work-info {
+            padding: 24px;
+        }
+
+        .work-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .work-info p {
+            color: var(--gray-500);
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+
+        .work-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 5px 14px;
+            background-color: var(--light-200);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            transition: var(--transition-fast);
+        }
+
+        .tag.active {
+            background-color: var(--secondary-light);
+            color: white;
+        }
+
+        .work-card:hover .tag {
+            background-color: var(--light-300);
+        }
+
+        .work-card:hover .tag.active {
+            background-color: var(--secondary);
+        }
+
+        /* ===================== 7. 模态框（缩放+淡入动效） ===================== */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(2px);
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-500);
+            transition: var(--transition-fast);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            color: white;
+            background-color: var(--secondary);
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--light-300);
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .modal-img {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .modal-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-slow);
+        }
+
+        .modal-content:hover .modal-img img {
+            transform: scale(1.03);
+        }
+
+        .modal-desc h4 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .modal-desc ul {
+            margin: 15px 0 15px 20px;
+            color: var(--gray-500);
+            line-height: 1.8;
+        }
+
+        .modal-desc p {
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+
+        .modal-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .modal-links a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: 1px solid var(--secondary);
+            border-radius: 8px;
+            color: var(--secondary);
+            transition: var(--transition-normal);
+        }
+
+        .modal-links a:hover {
+            background: linear-gradient(45deg, var(--secondary), var(--secondary-light));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .modal-footer {
+            padding-top: 20px;
+            border-top: 1px solid var(--light-300);
+            color: var(--gray-500);
+        }
+
+        /* ===================== 8. 开发日志（增强滚动动效） ===================== */
+        .dev-log {
+            background-color: var(--light-100);
+        }
+
+        .log-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .log-item {
+            background-color: white;
+            padding: 24px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            transition: var(--transition-slow);
+            border-left: 4px solid transparent;
+        }
+
+        .log-item.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            border-left-color: var(--secondary);
+        }
+
+        .log-date {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+
+        .log-item h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .log-item p {
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+
+        /* ===================== 9. 留言区（增强表单动效） ===================== */
+        .contact {
+            background-color: white;
+        }
+
+        .contact-form {
+            max-width: 650px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--primary);
+            font-size: 1.05rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 14px 16px;
+            border: 1px solid var(--light-300);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition-normal);
+            background-color: var(--light-100);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 4px rgba(230,74,25,0.1);
+            transform: translateY(-2px);
+            background-color: white;
+        }
+
+        .form-group textarea {
+            min-height: 160px;
+            resize: vertical;
+            line-height: 1.7;
+        }
+
+        /* ===================== 10. 社媒链接（增强动效） ===================== */
+        .social {
+            background-color: var(--light-100);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: white;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-slow);
+            font-size: 1.3rem;
+            color: var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 社媒图标hover动效：旋转+缩放+渐变背景 */
+        .social-link:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+
+        .social-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary), var(--accent-yellow));
+            opacity: 0;
+            transition: var(--transition-fast);
+            z-index: -1;
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        /* 不同平台自定义颜色 */
+        .social-link[title="微博"]:hover::before { background: linear-gradient(45deg, #e6162d, #ff8a00); }
+        .social-link[title="B站"]:hover::before { background: linear-gradient(45deg, #fb7299, #fdb062); }
+        .social-link[title="Steam"]:hover::before { background: linear-gradient(45deg, #1b2838, #66c0f4); }
+        .social-link[title="TapTap"]:hover::before { background: linear-gradient(45deg, #25b864, #1e88e5); }
+        .social-link[title="邮箱"]:hover::before { background: linear-gradient(45deg, #4285f4, #ea4335); }
+
+        /* ===================== 11. 页脚（优化样式） ===================== */
+        footer {
+            padding: 40px 0;
+            background-color: var(--primary-dark);
+            color: white;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--light-300);
+            transition: var(--transition-fast);
+        }
+
+        footer a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        footer p {
+            margin-bottom: 12px;
+        }
+
+        footer .footer-links {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* ===================== 12. 滚动渐入通用类 ===================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: var(--transition-slow);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* ===================== 13. 响应式适配（多断点优化） ===================== */
+        /* 平板端（768-1024px） */
+        @media (max-width: 1024px) {
+            .works-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-img {
+                height: 250px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        /* 移动端（≤768px） */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: var(--navbar-height);
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - var(--navbar-height));
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                transition: var(--transition-normal);
+                box-shadow: var(--shadow-lg);
+                z-index: 998;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .work-info {
+                padding: 20px;
+            }
+
+            .modal-content {
+                padding: 20px;
+            }
+
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* 小屏移动端（≤480px） */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.95rem;
+            }
+            
+            .form-group input,
+            .form-group textarea {
+                padding: 12px 14px;
+            }
+            
+            .social-links {
+                gap: 15px;
+            }
+        }
+    </style>
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 语义化头部 -->
+    <header>
+        <!-- 导航栏 -->
+        <nav id="navbar">
+            <div class="container nav-container flex-between">
+                <a href="#" class="logo">云枢工作室</a>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <a href="#home">首页</a>
+                    <a href="#works">作品</a>
+                    <a href="#log">开发日志</a>
+                    <a href="#contact">留言</a>
+                    <a href="#social">关注我们</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 主内容区 -->
+    <main>
+        <!-- 英雄区 -->
+        <section class="hero flex-center" id="home">
+            <div class="pixel-dot"></div>
+            <div class="pixel-dot"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>打造<span>无限可能</span>的独立游戏</h1>
+                    <p>云枢游戏工作室 | 专注独立游戏开发，用创意和技术构建独特的游戏世界</p>
+                    <a href="#works" class="btn pulse">查看我们的作品</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 作品展示 -->
+        <section class="works py-100 fade-in" id="works">
+            <div class="container">
+                <h2 class="section-title">我们的游戏</h2>
+                <div class="works-grid">
+                    <!-- 游戏卡片（模块化结构，便于复用） -->
+                    <div class="work-card" data-modal-target="gameModal">
+                        <div class="work-img">
+                            <img src="https://picsum.photos/600/400?random=1" alt="无尽地牢：像素冒险">
+                        </div>
+                        <div class="work-info">
+                            <h3>无尽地牢：像素冒险</h3>
+                            <p>一款横版肉鸽像素地牢闯关游戏，随机生成关卡，多样武器与道具，每次冒险都有新体验。</p>
+                            <div class="work-tags">
+                                <span class="tag">2D像素</span>
+                                <span class="tag">横版闯关</span>
+                                <span class="tag">平台跳跃</span>
+                                <span class="tag active">开发中</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 可快速添加新游戏卡片（示例） -->
+                    <div class="work-card" data-modal-target="gameModal2">
+                        <div class="work-img">
+                            <img src="https://picsum.photos/600/400?random=2" alt="星界旅人：像素探索">
+                        </div>
+                        <div class="work-info">
+                            <h3>星界旅人：像素探索</h3>
+                            <p>开放世界像素冒险游戏，探索未知星球，收集资源建造基地，与外星生物互动。</p>
+                            <div class="work-tags">
+                                <span class="tag">2D像素</span>
+                                <span class="tag">开放世界</span>
+                                <span class="tag">生存建造</span>
+                                <span class="tag active">概念设计</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 作品详情模态框（主游戏） -->
+        <div class="modal" id="gameModal">
+            <div class="modal-content">
+                <span class="close-modal" data-modal-close="gameModal"><i class="fas fa-times"></i></span>
+                <div class="modal-header">
+                    <h2>无尽地牢：像素冒险</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-img">
+                        <img src="https://picsum.photos/800/500?random=2" alt="游戏详情图">
+                    </div>
+                    <div class="modal-desc">
+                        <h4>游戏介绍</h4>
+                        <p>《无尽地牢：像素冒险》是我们首款独立开发的2D像素横版肉鸽地牢闯关游戏，核心玩法包含：</p>
+                        <ul>
+                            <li>随机生成的地牢关卡，每局体验不同</li>
+                            <li>数十种像素风格武器与道具组合</li>
+                            <li>高自由度的角色养成系统</li>
+                            <li>极具挑战性的BOSS战</li>
+                            <li>像素风美术，复古与现代结合的视觉体验</li>
+                        </ul>
+                        <p>当前状态：核心玩法开发中，预计2026年Q4开启封闭测试</p>
+                        <div class="modal-links">
+                            <a href="https://store.steampowered.com/" target="_blank"><i class="fab fa-steam"></i> Steam预约</a>
+                            <a href="https://www.taptap.com/" target="_blank"><i class="fas fa-mobile-alt"></i> TapTap预约</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p>© 2026 云枢工作室 保留所有权利</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 作品详情模态框（第二款游戏，示例） -->
+        <div class="modal" id="gameModal2">
+            <div class="modal-content">
+                <span class="close-modal" data-modal-close="gameModal2"><i class="fas fa-times"></i></span>
+                <div class="modal-header">
+                    <h2>星界旅人：像素探索</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-img">
+                        <img src="https://picsum.photos/800/500?random=3" alt="游戏详情图">
+                    </div>
+                    <div class="modal-desc">
+                        <h4>游戏介绍</h4>
+                        <p>《星界旅人：像素探索》是一款开放世界像素生存冒险游戏，核心玩法包含：</p>
+                        <ul>
+                            <li> procedurally generated 星球地形，每个星球独一无二</li>
+                            <li>资源收集与基地建造，自定义你的星际家园</li>
+                            <li>外星生物生态系统，友好/敌对生物互动</li>
+                            <li>多人联机合作，与好友一起探索宇宙</li>
+                        </ul>
+                        <p>当前状态：概念设计阶段，正在进行核心玩法验证</p>
+                        <div class="modal-links">
+                            <a href="#" target="_blank"><i class="fas fa-envelope"></i> 预约测试</a>
+                            <a href="#" target="_blank"><i class="fab fa-github"></i> 开发进度</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p>© 2026 云枢工作室 保留所有权利</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 开发日志 -->
+        <section class="dev-log py-100 fade-in" id="log">
+            <div class="container">
+                <h2 class="section-title">开发日志</h2>
+                <div class="log-list">
+                    <!-- 日志项1 -->
+                    <div class="log-item">
+                        <div class="log-date">2026.3.15</div>
+                        <h3>《无尽地牢》项目正式立项</h3>
+                        <p>讨论完成所有的需求和设计方案，项目正式立项。世界观设定、核心玩法、美术风格均已确定，团队开始分工开发。</p>
+                    </div>
+                    <!-- 日志项2 -->
+                    <div class="log-item">
+                        <div class="log-date">2026.4.10</div>
+                        <h3>核心战斗系统开发完成</h3>
+                        <p>完成基础的2D横版战斗系统，包含攻击、闪避、技能释放等核心操作，开始内部测试调优。</p>
+                    </div>
+                    <!-- 日志项3 -->
+                    <div class="log-item">
+                        <div class="log-date">2026.5.20</div>
+                        <h3>《星界旅人》概念设计启动</h3>
+                        <p>第二款游戏《星界旅人：像素探索》启动概念设计，确定开放世界+生存建造的核心方向。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 留言区 -->
+        <section class="contact py-100 fade-in" id="contact">
+            <div class="container">
+                <h2 class="section-title">给我们留言</h2>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">你的昵称</label>
+                        <input type="text" id="name" placeholder="请输入你的昵称" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">联系邮箱</label>
+                        <input type="email" id="email" placeholder="请输入你的邮箱" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">留言内容</label>
+                        <textarea id="message" placeholder="对游戏的建议/合作咨询/招聘相关/加入测试..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">提交留言</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 社媒/平台链接 -->
+        <section class="social py-50 fade-in" id="social">
+            <div class="container">
+                <h2 class="section-title">关注我们</h2>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="微博"><i class="fab fa-weibo"></i></a>
+                    <a href="#" class="social-link" title="B站"><i class="fab fa-bilibili"></i></a>
+                    <a href="#" class="social-link" title="Steam"><i class="fab fa-steam"></i></a>
+                    <a href="#" class="social-link" title="TapTap"><i class="fas fa-gamepad"></i></a>
+                    <a href="#" class="social-link" title="邮箱"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <p>© 2026 云枢工作室 | 独立游戏开发</p>
+            <div class="footer-links">
+                <a href="https://store.steampowered.com/" target="_blank">Steam</a> | 
+                <a href="https://www.taptap.com/" target="_blank">TapTap</a> |
+                <a href="#contact">联系我们</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS交互逻辑（模块化拆分） -->
+    <script>
+        // ===================== 工具函数 =====================
+        // 防抖函数（优化滚动性能）
+        function debounce(func, wait = 100) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        // ===================== 导航栏功能 =====================
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const navbar = document.getElementById('navbar');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // 切换图标
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+            // 禁止/恢复背景滚动
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        // 导航栏滚动效果（防抖）
+        window.addEventListener('scroll', debounce(() => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }));
+
+        // 点击导航链接关闭移动端菜单
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // ===================== 模态框功能（通用化，支持多模态框） =====================
+        // 打开模态框
+        document.querySelectorAll('.work-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const modalId = card.dataset.modalTarget;
+                const modal = document.getElementById(modalId);
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // 关闭模态框
+        document.querySelectorAll('.close-modal').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modalId = btn.dataset.modalClose;
+                const modal = document.getElementById(modalId);
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // 点击模态框外部关闭
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // ESC键关闭模态框
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+        });
+
+        // ===================== 滚动渐入动效 =====================
+        const fadeElements = document.querySelectorAll('.fade-in, .log-item');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // 只观察一次，优化性能
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px' // 提前触发
+        });
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // ===================== 表单提交 =====================
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // 模拟提交成功
+            alert('留言提交成功！我们会在1-3个工作日内回复你～');
+            contactForm.reset();
+            // 可选：添加提交成功的动效
+            const submitBtn = contactForm.querySelector('.btn');
+            submitBtn.textContent = '提交成功！';
+            submitBtn.style.background = 'linear-gradient(45deg, #25b864, #1e88e5)';
+            setTimeout(() => {
+                submitBtn.textContent = '提交留言';
+                submitBtn.style.background = '';
+            }, 2000);
+        });
+
+        // ===================== 修复锚点跳转被导航栏遮挡 =====================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // 计算偏移量（导航栏高度）
+                    const navbarHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--navbar-height-scrolled'));
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                    
+                    // 平滑滚动
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
