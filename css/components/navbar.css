@@ -1,0 +1,89 @@
+header nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(255,255,255,0.98);
+  backdrop-filter: blur(10px); /* 更柔和的毛玻璃 */
+  z-index: 999;
+  box-shadow: var(--shadow-sm); /* 初始更柔和阴影 */
+  height: var(--navbar-height);
+  transition: var(--transition-normal);
+}
+
+nav.scrolled {
+  height: var(--navbar-height-scrolled);
+  background-color: rgba(255,255,255,0.99);
+  box-shadow: var(--shadow-md);
+}
+
+.nav-container {
+  height: 100%;
+  display: flex; /* 补充缺失的flex */
+  align-items: center; /* 垂直居中 */
+  justify-content: space-between; /* 两端对齐 */
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Logo动效：更柔和的旋转+缩放 */
+.logo::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(45deg, var(--secondary), var(--secondary-light));
+  transform: rotate(45deg);
+  transition: var(--transition-slow);
+  border-radius: 4px; /* 更圆润的像素风 */
+}
+.logo:hover::before {
+  transform: rotate(80deg) scale(1.1); /* 更温和的旋转角度 */
+  box-shadow: 0 0 8px rgba(232, 159, 124, 0.2); /* 更淡的阴影 */
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  align-items: center; /* 垂直居中 */
+}
+.nav-links a {
+  font-weight: 500;
+  position: relative;
+  padding: 4px 0;
+  color: var(--primary-dark); /* 补充文字颜色 */
+}
+/* 导航链接下划线：更柔和的渐变 */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--secondary), var(--accent-yellow));
+  transition: var(--transition-normal);
+  border-radius: 1px;
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--primary);
+  transition: var(--transition-fast);
+}
+.menu-toggle:hover {
+  color: var(--secondary);
+  transform: scale(1.05); /* 更温和的缩放 */
+}

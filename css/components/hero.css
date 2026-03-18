@@ -1,0 +1,75 @@
+.hero {
+  height: 100vh;
+  background-color: var(--light-100);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 像素点装饰（INS风小元素） */
+.pixel-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: var(--secondary-light);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: float 6s infinite ease-in-out;
+}
+
+.pixel-dot:nth-child(1) {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.pixel-dot:nth-child(2) {
+  top: 70%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.1); }
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 24px;
+  line-height: 1.2;
+  color: var(--primary-dark);
+}
+
+.hero h1 span {
+  color: var(--secondary);
+  position: relative;
+}
+
+/* 文字装饰下划线（INS风） */
+.hero h1 span::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--secondary), var(--accent-yellow));
+  border-radius: 2px;
+  transform: skewX(-12deg);
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: var(--primary-light);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}

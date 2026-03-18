@@ -1,0 +1,145 @@
+/* 平板端（768-1024px） */
+@media (max-width: 1024px) {
+  /* 作品网格适配 */
+  .works-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px; /* 减小间距更适配平板 */
+  }
+  
+  /* 模态框适配 */
+  .modal-body {
+    grid-template-columns: 1fr;
+  }
+  .modal-img {
+    height: 280px; /* 适中高度 */
+  }
+  
+  /* 英雄区文字适配 */
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .hero p {
+    font-size: 1.15rem;
+  }
+  
+  /* 社媒图标适配 */
+  .social-link {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+/* 移动端（≤768px）- 核心优化 */
+@media (max-width: 768px) {
+  /* 导航栏移动端交互 */
+  .nav-links {
+    position: fixed;
+    top: var(--navbar-height);
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - var(--navbar-height));
+    background-color: var(--light-100); /* 奶油底色更柔和 */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px; /* 减小间距更适配触控 */
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-lg);
+    z-index: 998;
+    padding: 20px 0; /* 增加内边距 */
+  }
+  .nav-links.active {
+    left: 0;
+  }
+  
+  /* 菜单按钮常驻 */
+  .menu-toggle {
+    display: block;
+    z-index: 999; /* 确保不被遮挡 */
+  }
+  
+  /* 英雄区移动端适配 */
+  .hero {
+    height: 90vh; /* 减小高度避免溢出 */
+    padding-top: calc(var(--navbar-height) + 20px);
+  }
+  .hero h1 {
+    font-size: 2rem;
+    line-height: 1.4; /* 更紧凑的行高 */
+  }
+  .hero p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+  
+  /* 作品展示移动端 */
+  .works-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+  }
+  .work-info {
+    padding: 20px 16px; /* 更适配触控 */
+  }
+  
+  /* 模态框移动端优化 */
+  .modal {
+    padding: 10px; /* 减小边距 */
+  }
+  .modal-content {
+    padding: 20px 16px;
+    max-height: 85vh; /* 避免超出屏幕 */
+  }
+  .close-modal {
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px; /* 适配触控大小 */
+  }
+  .modal-img {
+    height: 220px;
+  }
+  
+  /* 表单移动端适配 */
+  .form-group input,
+  .form-group textarea {
+    padding: 12px 14px;
+    font-size: 0.95rem; /* 更适配移动端文字 */
+  }
+  .form-group textarea {
+    min-height: 140px; /* 减小初始高度 */
+  }
+  
+  /* 社媒链接移动端 */
+  .social-links {
+    gap: 20px;
+  }
+  .social-link {
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
+  }
+}
+
+/* 小屏移动端（≤480px）- 极致适配 */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.7rem;
+  }
+  .btn {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+  .social-links {
+    gap: 15px;
+  }
+  .log-item {
+    padding: 20px 16px; /* 日志项更紧凑 */
+  }
+  .section-title::after {
+    width: 50px; /* 小标题下划线 */
+  }
+}

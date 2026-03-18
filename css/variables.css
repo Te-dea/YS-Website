@@ -1,0 +1,36 @@
+:root {
+  /* INS风主色：低饱和奶油灰蓝（温和不刺眼） */
+  --primary: #708090;
+  --primary-light: #8a9ba8;
+  --primary-dark: #5a6978;
+  
+  /* INS强调色：低饱和珊瑚粉（柔和INS风） */
+  --secondary: #e89f7c;
+  --secondary-light: #f0b89e;
+  --secondary-dark: #d48a68;
+  
+  /* 辅助色：莫兰迪浅黄/浅蓝（温和点缀） */
+  --accent-yellow: #f5e7c1;
+  --accent-blue: #b8d8e8;
+  
+  /* 中性色：奶油梯度（INS柔和质感） */
+  --light-100: #faf9f7; /* 奶油白 */
+  --light-200: #f5f3ef; /* 浅奶油灰 */
+  --light-300: #eeebe6; /* 奶油灰 */
+  --gray-400: #b0aba4; /* 浅灰棕 */
+  --gray-500: #918c84; /* 中灰棕 */
+  --gray-600: #726d66; /* 深灰棕 */
+  
+  /* 动效：更柔和的曲线+时长（INS风温和动效） */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.09);
+  --shadow-xl: 0 12px 32px rgba(0,0,0,0.12);
+  --transition-fast: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-normal: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-slow: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  /* 导航栏高度（统一管理） */
+  --navbar-height: 70px;
+  --navbar-height-scrolled: 60px;
+}
