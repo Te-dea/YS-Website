@@ -1,237 +1,215 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>云枢游戏工作室</title>
-  <!-- 引入CSS（模块化） -->
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components/navbar.css">
-  <link rel="stylesheet" href="css/components/hero.css">
-  <link rel="stylesheet" href="css/components/works.css">
-  <link rel="stylesheet" href="css/components/modal.css">
-  <link rel="stylesheet" href="css/components/dev-log.css">
-  <link rel="stylesheet" href="css/components/contact.css">
-  <link rel="stylesheet" href="css/components/social.css">
-  <link rel="stylesheet" href="css/components/footer.css">
-  <link rel="stylesheet" href="css/responsive.css">
-  <!-- 字体图标 -->
-  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云枢工作室 | 专注独立游戏开发</title>
+    <!-- 极简版Tailwind，确保加载 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ins: {
+                            white: '#FCFCFC',
+                            beige: '#F8F4EE',
+                            gray: '#EDECEA',
+                            accent: '#C8D9E6',
+                            accentHover: '#B0C8D8',
+                            text: '#444444',
+                            textLight: '#666666'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 全局基础样式，确保所有内容默认显示 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #FCFCFC;
+            color: #444444;
+            font-family: 'PingFang SC', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+        }
+        /* 卡片样式 */
+        .game-card {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+            margin-bottom: 24px;
+        }
+        .game-card:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+            transform: translateY(-3px);
+            transition: all 0.3s ease;
+        }
+        /* 响应式导航 */
+        .nav-menu {
+            display: flex;
+            gap: 24px;
+        }
+        .hamburger {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .hamburger {
+                display: block;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- 导航栏 -->
-  <header>
-    <nav id="navbar">
-      <div class="container nav-container flex-between">
-        <a href="#" class="logo">云枢工作室</a>
-        <div class="menu-toggle" id="menuToggle">
-          <i class="fas fa-bars"></i>
-        </div>
-        <div class="nav-links" id="navLinks">
-          <a href="#home">首页</a>
-          <a href="#works">作品</a>
-          <a href="#log">开发日志</a>
-          <a href="#contact">留言</a>
-          <a href="#social">关注我们</a>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <!-- 英雄区 -->
-    <section class="hero flex-center" id="home">
-      <div class="pixel-dot"></div>
-      <div class="pixel-dot"></div>
-      <div class="container">
-        <div class="hero-content">
-          <h1>打造<span>无限可能</span>的独立游戏</h1>
-          <p>云枢游戏工作室 | 专注独立游戏开发，用创意和技术构建独特的游戏世界</p>
-          <a href="#works" class="btn pulse">查看我们的作品</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 作品展示 -->
-    <section class="works py-100 fade-in" id="works">
-      <div class="container">
-        <h2 class="section-title">我们的游戏</h2>
-        <div class="works-grid">
-          <div class="work-card" data-modal-target="gameModal">
-            <div class="work-img">
-              <img src="https://picsum.photos/600/400?random=1" alt="无尽地牢：像素冒险">
+    <!-- 头部导航 -->
+    <header class="sticky top-0 z-50 bg-ins-white border-b border-ins-gray py-3 px-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-lg font-medium text-ins-text">云枢工作室</div>
+            <!-- 汉堡菜单（移动端） -->
+            <div class="hamburger text-ins-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
             </div>
-            <div class="work-info">
-              <h3>无尽地牢：像素冒险</h3>
-              <p>一款横版肉鸽像素地牢闯关游戏，随机生成关卡，多样武器与道具，每次冒险都有新体验。</p>
-              <div class="work-tags">
-                <span class="tag">2D像素</span>
-                <span class="tag">横版闯关</span>
-                <span class="tag">平台跳跃</span>
-                <span class="tag active">开发中</span>
-              </div>
-            </div>
-          </div>
-          <div class="work-card" data-modal-target="gameModal2">
-            <div class="work-img">
-              <img src="https://picsum.photos/600/400?random=2" alt="星界旅人：像素探索">
-            </div>
-            <div class="work-info">
-              <h3>星界旅人：像素探索</h3>
-              <p>开放世界像素冒险游戏，探索未知星球，收集资源建造基地，与外星生物互动。</p>
-              <div class="work-tags">
-                <span class="tag">2D像素</span>
-                <span class="tag">开放世界</span>
-                <span class="tag">生存建造</span>
-                <span class="tag active">概念设计</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 模态框1 -->
-    <div class="modal" id="gameModal">
-      <div class="modal-content">
-        <span class="close-modal" data-modal-close="gameModal"><i class="fas fa-times"></i></span>
-        <div class="modal-header">
-          <h2>无尽地牢：像素冒险</h2>
-        </div>
-        <div class="modal-body">
-          <div class="modal-img">
-            <img src="https://picsum.photos/800/500?random=2" alt="游戏详情图">
-          </div>
-          <div class="modal-desc">
-            <h4>游戏介绍</h4>
-            <p>《无尽地牢：像素冒险》是我们首款独立开发的2D像素横版肉鸽地牢闯关游戏，核心玩法包含：</p>
-            <ul>
-              <li>随机生成的地牢关卡，每局体验不同</li>
-              <li>数十种像素风格武器与道具组合</li>
-              <li>高自由度的角色养成系统</li>
-              <li>极具挑战性的BOSS战</li>
-              <li>像素风美术，复古与现代结合的视觉体验</li>
+            <!-- 导航菜单 -->
+            <ul class="nav-menu">
+                <li><a href="#home" class="text-ins-text hover:text-ins-accent">首页</a></li>
+                <li><a href="#games" class="text-ins-text hover:text-ins-accent">游戏作品</a></li>
+                <li><a href="#about" class="text-ins-text hover:text-ins-accent">关于我们</a></li>
+                <li><a href="#contact" class="text-ins-text hover:text-ins-accent">联系我们</a></li>
             </ul>
-            <p>当前状态：核心玩法开发中，预计2026年Q4开启封闭测试</p>
-            <div class="modal-links">
-              <a href="https://store.steampowered.com/" target="_blank"><i class="fab fa-steam"></i> Steam预约</a>
-              <a href="https://www.taptap.com/" target="_blank"><i class="fas fa-mobile-alt"></i> TapTap预约</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 首页Banner（强制显示，移除渐显） -->
+        <section id="home" class="py-16 bg-ins-beige px-4">
+            <div class="container mx-auto text-center">
+                <h1 class="text-3xl md:text-4xl font-light mb-6">
+                    独立游戏的<span class="text-ins-accent">温度与创意</span>
+                </h1>
+                <p class="text-lg text-ins-textLight max-w-2xl mx-auto mb-8">
+                    用简单的设计，做有温度的独立游戏
+                </p>
+                <button class="bg-ins-accent hover:bg-ins-accentHover text-white px-8 py-2 rounded-full cursor-pointer">
+                    查看我们的作品
+                </button>
             </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <p>© 2026 云枢工作室 保留所有权利</p>
-        </div>
-      </div>
-    </div>
+        </section>
 
-    <!-- 模态框2 -->
-    <div class="modal" id="gameModal2">
-      <div class="modal-content">
-        <span class="close-modal" data-modal-close="gameModal2"><i class="fas fa-times"></i></span>
-        <div class="modal-header">
-          <h2>星界旅人：像素探索</h2>
-        </div>
-        <div class="modal-body">
-          <div class="modal-img">
-            <img src="https://picsum.photos/800/500?random=3" alt="游戏详情图">
-          </div>
-          <div class="modal-desc">
-            <h4>游戏介绍</h4>
-            <p>《星界旅人：像素探索》是一款开放世界像素生存冒险游戏，核心玩法包含：</p>
-            <ul>
-              <li> procedurally generated 星球地形，每个星球独一无二</li>
-              <li>资源收集与基地建造，自定义你的星际家园</li>
-              <li>外星生物生态系统，友好/敌对生物互动</li>
-              <li>多人联机合作，与好友一起探索宇宙</li>
-            </ul>
-            <p>当前状态：概念设计阶段，正在进行核心玩法验证</p>
-            <div class="modal-links">
-              <a href="#" target="_blank"><i class="fas fa-envelope"></i> 预约测试</a>
-              <a href="#" target="_blank"><i class="fab fa-github"></i> 开发进度</a>
+        <!-- 游戏作品（强制显示，简化布局） -->
+        <section id="games" class="py-16 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-2xl font-light mb-12 text-center text-ins-text">我们的游戏作品</h2>
+                <!-- 简化网格布局，确保卡片显示 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 游戏卡片1 -->
+                    <div class="game-card">
+                        <img src="https://picsum.photos/600/400?random=1" alt="游戏名称1封面" class="w-full h-48 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-medium mb-2 text-ins-text">游戏名称1</h3>
+                        <p class="text-ins-textLight mb-4">简约风格的休闲独立游戏</p>
+                        <a href="game-detail.html?game=1" class="text-ins-accent hover:underline inline-flex items-center gap-1">
+                            查看详情 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <!-- 游戏卡片2 -->
+                    <div class="game-card">
+                        <img src="https://picsum.photos/600/400?random=2" alt="游戏名称2封面" class="w-full h-48 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-medium mb-2 text-ins-text">游戏名称2</h3>
+                        <p class="text-ins-textLight mb-4">像素风格的冒险独立游戏</p>
+                        <a href="game-detail.html?game=2" class="text-ins-accent hover:underline inline-flex items-center gap-1">
+                            查看详情 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <!-- 游戏卡片3 -->
+                    <div class="game-card">
+                        <img src="https://picsum.photos/600/400?random=3" alt="游戏名称3封面" class="w-full h-48 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-medium mb-2 text-ins-text">游戏名称3</h3>
+                        <p class="text-ins-textLight mb-4">解谜风格的剧情独立游戏</p>
+                        <a href="game-detail.html?game=3" class="text-ins-accent hover:underline inline-flex items-center gap-1">
+                            查看详情 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
-          </div>
+        </section>
+
+        <!-- 关于我们 -->
+        <section id="about" class="py-16 bg-ins-beige px-4">
+            <div class="container mx-auto max-w-3xl">
+                <h2 class="text-2xl font-light mb-12 text-center text-ins-text">关于我们</h2>
+                <p class="text-ins-textLight mb-6">
+                    我们是一家专注于独立游戏开发的工作室，由热爱游戏的开发者组成，坚持打造有温度的游戏作品。
+                </p>
+                <p class="text-ins-textLight">
+                    用代码和创意，探索游戏的无限可能。
+                </p>
+            </div>
+        </section>
+
+        <!-- 联系我们 -->
+        <section id="contact" class="py-16 px-4">
+            <div class="container mx-auto max-w-xl">
+                <h2 class="text-2xl font-light mb-12 text-center text-ins-text">联系我们</h2>
+                <form id="contactForm" class="bg-white p-8 rounded-lg shadow-md">
+                    <div class="mb-4">
+                        <label for="name" class="block text-ins-text mb-2">姓名</label>
+                        <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-ins-gray rounded-md" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-ins-text mb-2">邮箱</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-ins-gray rounded-md" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-ins-text mb-2">留言</label>
+                        <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-ins-gray rounded-md" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-ins-accent hover:bg-ins-accentHover text-white py-2 rounded-md cursor-pointer">
+                        发送留言
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-ins-gray py-6 border-t border-ins-beige px-4">
+        <div class="container mx-auto text-center text-ins-textLight">
+            <p>© 2026 云枢工作室 - 保留所有权利</p>
         </div>
-        <div class="modal-footer">
-          <p>© 2026 云枢工作室 保留所有权利</p>
-        </div>
-      </div>
-    </div>
+    </footer>
 
-    <!-- 开发日志 -->
-    <section class="dev-log py-100 fade-in" id="log">
-      <div class="container">
-        <h2 class="section-title">开发日志</h2>
-        <div class="log-list">
-          <div class="log-item">
-            <div class="log-date">2026.3.15</div>
-            <h3>《无尽地牢》项目正式立项</h3>
-            <p>讨论完成所有的需求和设计方案，项目正式立项。世界观设定、核心玩法、美术风格均已确定，团队开始分工开发。</p>
-          </div>
-          <div class="log-item">
-            <div class="log-date">2026.4.10</div>
-            <h3>核心战斗系统开发完成</h3>
-            <p>完成基础的2D横版战斗系统，包含攻击、闪避、技能释放等核心操作，开始内部测试调优。</p>
-          </div>
-          <div class="log-item">
-            <div class="log-date">2026.5.20</div>
-            <h3>《星界旅人》概念设计启动</h3>
-            <p>第二款游戏《星界旅人：像素探索》启动概念设计，确定开放世界+生存建造的核心方向。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 留言区 -->
-    <section class="contact py-100 fade-in" id="contact">
-      <div class="container">
-        <h2 class="section-title">给我们留言</h2>
-        <form class="contact-form" id="contactForm">
-          <div class="form-group">
-            <label for="name">你的昵称</label>
-            <input type="text" id="name" placeholder="请输入你的昵称" required>
-          </div>
-          <div class="form-group">
-            <label for="email">联系邮箱</label>
-            <input type="email" id="email" placeholder="请输入你的邮箱" required>
-          </div>
-          <div class="form-group">
-            <label for="message">留言内容</label>
-            <textarea id="message" placeholder="对游戏的建议/合作咨询/招聘相关/加入测试..." required></textarea>
-          </div>
-          <button type="submit" class="btn">提交留言</button>
-        </form>
-      </div>
-    </section>
-
-    <!-- 社媒链接 -->
-    <section class="social py-50 fade-in" id="social">
-      <div class="container">
-        <h2 class="section-title">关注我们</h2>
-        <div class="social-links">
-          <a href="#" class="social-link" title="微博"><i class="fab fa-weibo"></i></a>
-          <a href="#" class="social-link" title="B站"><i class="fab fa-bilibili"></i></a>
-          <a href="#" class="social-link" title="Steam"><i class="fab fa-steam"></i></a>
-          <a href="#" class="social-link" title="TapTap"><i class="fas fa-gamepad"></i></a>
-          <a href="#" class="social-link" title="邮箱"><i class="fas fa-envelope"></i></a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- 页脚 -->
-  <footer>
-    <div class="container">
-      <p>© 2026 云枢工作室 | 独立游戏开发</p>
-      <div class="footer-links">
-        <a href="#home">首页</a> | <a href="#works">作品</a> | <a href="#log">开发日志</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- 引入JS -->
-  <script src="js/main.js"></script>
+    <!-- 极简脚本，只保留表单功能 -->
+    <script>
+        // 表单提交提示
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('留言提交成功！我们会尽快回复你～');
+            this.reset();
+        });
+    </script>
 </body>
 </html>

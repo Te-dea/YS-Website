@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏详情 | 云枢工作室</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ins: {
+                            white: '#FCFCFC',
+                            beige: '#F8F4EE',
+                            gray: '#EDECEA',
+                            accent: '#C8D9E6',
+                            accentHover: '#B0C8D8',
+                            text: '#444444',
+                            textLight: '#666666'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #FCFCFC;
+            color: #444444;
+            font-family: 'PingFang SC', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 24px;
+        }
+        .hamburger {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .hamburger {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header class="sticky top-0 z-50 bg-ins-white border-b border-ins-gray py-3 px-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-lg font-medium text-ins-text">云枢工作室</div>
+            <div class="hamburger text-ins-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="text-ins-text hover:text-ins-accent">首页</a></li>
+                <li><a href="index.html#games" class="text-ins-text hover:text-ins-accent">游戏作品</a></li>
+                <li><a href="index.html#about" class="text-ins-text hover:text-ins-accent">关于我们</a></li>
+                <li><a href="index.html#contact" class="text-ins-text hover:text-ins-accent">联系我们</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <!-- 游戏详情Banner -->
+        <section class="py-10 bg-ins-beige px-4">
+            <div class="container mx-auto">
+                <a href="index.html#games" class="text-ins-accent hover:underline mb-6 inline-block">
+                    ← 返回作品列表
+                </a>
+                <h1 class="text-3xl font-light text-ins-text mb-4" id="gameTitle">游戏名称1</h1>
+                <p class="text-ins-textLight" id="gameSubtitle">简约风格的休闲独立游戏</p>
+            </div>
+        </section>
+
+        <!-- 游戏详情内容 -->
+        <section class="py-16 px-4">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <!-- 游戏截图 -->
+                    <div class="rounded-lg shadow-md overflow-hidden">
+                        <img src="https://picsum.photos/800/500?random=1" alt="游戏截图" class="w-full h-auto">
+                    </div>
+                    <!-- 游戏介绍 -->
+                    <div>
+                        <h2 class="text-xl font-medium text-ins-text mb-6">游戏介绍</h2>
+                        <p class="text-ins-textLight mb-4" id="gameDesc">
+                            这是一款主打简约风格的休闲独立游戏，我们希望通过简单的操作和温暖的视觉风格，为玩家带来轻松的游戏体验。
+                        </p>
+                        <p class="text-ins-textLight mb-6">
+                            游戏核心玩法围绕「轻交互+慢节奏」设计，没有复杂的数值体系，只有纯粹的游戏乐趣。
+                        </p>
+                        <h3 class="text-lg font-medium text-ins-text mb-4">游戏特色</h3>
+                        <ul class="text-ins-textLight space-y-2 mb-6">
+                            <li>• 极简的视觉风格，温和的色彩搭配</li>
+                            <li>• 无广告、无内购的纯粹体验</li>
+                            <li>• 适配手机/平板/电脑多端游玩</li>
+                            <li>• 原创的背景音乐，营造沉浸式氛围</li>
+                        </ul>
+                        <button class="bg-ins-accent hover:bg-ins-accentHover text-white px-6 py-2 rounded-full cursor-pointer">
+                            下载试玩版
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 更多截图 -->
+                <div class="mt-16">
+                    <h2 class="text-xl font-medium text-ins-text mb-8 text-center">更多游戏截图</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="rounded-lg shadow-md overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=11" alt="游戏截图1" class="w-full h-48 object-cover">
+                        </div>
+                        <div class="rounded-lg shadow-md overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=12" alt="游戏截图2" class="w-full h-48 object-cover">
+                        </div>
+                        <div class="rounded-lg shadow-md overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=13" alt="游戏截图3" class="w-full h-48 object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-ins-gray py-6 border-t border-ins-beige mt-16 px-4">
+        <div class="container mx-auto text-center text-ins-textLight">
+            <p>© 2026 云枢工作室 - 保留所有权利</p>
+        </div>
+    </footer>
+
+    <!-- 加载游戏详情 -->
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameId = urlParams.get('game');
+        const gameData = {
+            '1': {
+                title: '游戏名称1',
+                subtitle: '简约风格的休闲独立游戏',
+                desc: '这是一款主打简约风格的休闲独立游戏，我们希望通过简单的操作和温暖的视觉风格，为玩家带来轻松的游戏体验。'
+            },
+            '2': {
+                title: '游戏名称2',
+                subtitle: '像素风格的冒险独立游戏',
+                desc: '这是一款像素风格的冒险独立游戏，融合了经典的像素美术和现代的游戏设计，带你体验一段充满温暖的冒险旅程。'
+            },
+            '3': {
+                title: '游戏名称3',
+                subtitle: '解谜风格的剧情独立游戏',
+                desc: '这是一款解谜风格的剧情独立游戏，通过层层递进的谜题和细腻的剧情，讲述一个有温度的故事。'
+            }
+        };
+        if (gameId && gameData[gameId]) {
+            document.getElementById('gameTitle').textContent = gameData[gameId].title;
+            document.getElementById('gameSubtitle').textContent = gameData[gameId].subtitle;
+            document.getElementById('gameDesc').textContent = gameData[gameId].desc;
+        }
+    </script>
+</body>
+</html>
