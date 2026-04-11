@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面找不到 - 云枢工作室</title>
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/theme.css">
+    <link rel="stylesheet" href="./assets/css/animation.css">
+    <style>
+        .not-found { 
+            text-align: center; 
+            padding: 8rem 2rem;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .not-found h2 { 
+            font-size: 5rem; 
+            color: var(--color-primary); 
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(120deg, var(--color-primary), var(--color-secondary-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: scaleIn 1s ease forwards;
+            opacity: 0;
+        }
+        .not-found p { 
+            margin-bottom: 3rem; 
+            color: var(--color-text-secondary);
+            font-size: 1.2rem;
+            animation: fadeIn 1s ease 0.5s forwards;
+            opacity: 0;
+        }
+        .not-found .primary-btn {
+            animation: slideUp 1s ease 0.8s forwards;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container not-found">
+        <h2>404</h2>
+        <p>页面不见了，不如回到首页看看我们的游戏吧~</p>
+        <button class="btn primary-btn" onclick="window.location.href='./pages/index.html'">返回首页</button>
+    </div>
+</body>
+</html>

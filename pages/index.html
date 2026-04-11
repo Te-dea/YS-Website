@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 基础适配配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="云枢工作室 - 云卷万象，枢定乾坤 | 独立游戏工坊">
+    <!-- 安全响应头 -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; connect-src 'self';">
+    <title>云枢工作室 - 云卷万象，枢定乾坤</title>
+    <!-- 资源加载优化：预加载关键字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS加载优化：按优先级引入 -->
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/animation.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <!-- 头部导航（语义化+动效） -->
+    <header class="header container">
+        <div class="logo-wrapper">
+            <h1 class="studio-name animate-slide-in animate-text-reveal">云枢工作室</h1>
+        </div>
+        <nav class="nav-menu">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="./index.html" class="nav-link">首页</a></li>
+                <li class="nav-item"><a href="./about.html" class="nav-link">关于我们</a></li>
+                <li class="nav-item"><a href="./projects.html" class="nav-link">游戏项目</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 核心内容区 -->
+    <main class="main container">
+        <!-- 英雄区（优化，移除非游戏图片，突出品牌） -->
+        <section class="hero-section animate-fade-in-delay">
+            <div class="hero-content">
+                <h2 class="hero-title animate-text-reveal">用热爱打造属于自己的游戏世界</h2>
+                <p class="hero-slogan">云卷万象，枢定乾坤</p>
+                <p class="hero-desc">独立游戏工坊，开发原创游戏，每一款作品都凝聚着对游戏的热爱与创意。</p>
+                <button class="btn primary-btn animate-slide-up" onclick="window.location.href='./projects.html'">查看我们的项目</button>
+            </div>
+        </section>
+
+        <!-- 项目展示区（优化排版+动效） -->
+        <section class="projects-section">
+            <h3 class="section-title animate-fade-in">我们的游戏项目</h3>
+            <div class="projects-grid">
+                <div class="project-card animate-hover-scale animate-fade-in" style="animation-delay: 0.2s">
+                    <img src="../assets/images/game-1.jpg" alt="像素冒险记" class="project-img">
+                    <div class="project-info">
+                        <h4 class="project-name">像素冒险记</h4>
+                        <p class="project-desc">轻量像素风冒险游戏，适配全平台，沉浸式的冒险体验</p>
+                    </div>
+                </div>
+                <div class="project-card animate-hover-scale animate-fade-in" style="animation-delay: 0.4s">
+                    <img src="../assets/images/game-2.jpg" alt="节奏方块" class="project-img">
+                    <div class="project-info">
+                        <h4 class="project-name">节奏方块</h4>
+                        <p class="project-desc">原创节奏类休闲游戏，治愈系画风，解压又有趣</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer container animate-fade-in" style="animation-delay: 0.6s">
+        <p class="copyright">© 2026 云枢工作室 - 保留所有权利</p>
+        <div class="contact">
+            <a href="#" class="contact-link">邮箱：xxx@example.com</a>
+        </div>
+    </footer>
+
+    <!-- JS加载优化：defer提升渲染性能 -->
+    <script src="../assets/js/utils.js" defer></script>
+    <script src="../assets/js/security.js" defer></script>
+    <script src="../assets/js/interaction.js" defer></script>
+</body>
+</html>

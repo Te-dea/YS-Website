@@ -1,0 +1,72 @@
+/* 全局重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    will-change: transform, opacity; /* 提前声明动效属性，优化渲染性能 */
+}
+
+/* 通用样式 */
+body {
+    font-family: 'Inter', sans-serif; /* INS风常用无衬线字体 */
+    line-height: 1.7; /* 更舒适的行高，提升可读性 */
+    color: #4A4A4A; /* 正文深灰，保证可读性 */
+    background-color: #F9F7F8; /* 奶油白主背景 */
+    overflow-x: hidden; /* 防止横向滚动 */
+    font-size: 16px; /* 基准字号，适配rem */
+}
+
+/* 通用容器 */
+.container {
+    width: 92%; /* 微调宽度，提升呼吸感 */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 0.5rem; /* 移动端最小间距 */
+}
+
+/* 通用链接样式 */
+a {
+    text-decoration: none;
+    color: inherit;
+    position: relative; /* 为hover下划线做准备 */
+    transition: color 0.3s ease; /* 轻量过渡，性能优先 */
+}
+
+a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+/* 通用按钮重置 */
+button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    will-change: transform, box-shadow; /* 优化按钮动效渲染 */
+}
+
+/* 清除浮动 */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* 图片自适应 */
+.project-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+}

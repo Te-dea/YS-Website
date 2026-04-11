@@ -1,0 +1,116 @@
+/* 性能优化：提前声明动效属性 */
+.animate-fade-in,
+.animate-fade-in-delay,
+.animate-slide-in,
+.animate-slide-up,
+.animate-scale-in {
+    will-change: transform, opacity;
+}
+
+/* 基础淡入 */
+.animate-fade-in {
+    animation: fadeIn 0.8s ease forwards;
+    opacity: 0;
+}
+
+.animate-fade-in-delay {
+    animation: fadeIn 1s ease 0.3s forwards;
+    opacity: 0;
+}
+
+/* 新增：从右滑入 */
+.animate-slide-in {
+    animation: slideIn 0.8s ease forwards;
+    transform: translateX(-20px);
+    opacity: 0;
+}
+
+/* 新增：从下滑入 */
+.animate-slide-up {
+    animation: slideUp 0.9s ease forwards;
+    transform: translateY(30px);
+    opacity: 0;
+}
+
+/* 新增：缩放入场 */
+.animate-scale-in {
+    animation: scaleIn 0.8s ease forwards;
+    transform: scale(0.95);
+    opacity: 0;
+}
+
+/* 卡片hover动效 */
+.animate-hover-scale {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-hover-scale:hover {
+    transform: translateY(-8px) scale(1.02); /* 位移+缩放 */
+    box-shadow: var(--shadow-hover);
+}
+
+/* 游戏图片hover动效 */
+.project-img:hover {
+    transform: scale(1.03); /* 图片微缩放 */
+}
+
+/* 文字逐字渐显 */
+.animate-text-reveal {
+    position: relative;
+    overflow: hidden;
+}
+
+.animate-text-reveal::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-bg);
+    animation: textReveal 1.2s ease 0.2s forwards;
+}
+
+/* 关键帧定义 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes textReveal {
+    from { left: 0; }
+    to { left: 100%; }
+}

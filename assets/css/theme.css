@@ -1,0 +1,184 @@
+/* 马卡龙色调定义 */
+:root {
+    /* 主色调：INS风温和感+高级灰调 */
+    --color-primary: #B0D8C6; /* 淡蓝绿（低饱和） */
+    --color-primary-light: #D1E9DF; 
+    --color-primary-dark: #98C7B3; /* 加深版，用于hover/强调 */
+    --color-bg: #F9F7F8; /* 奶油白背景 */
+    
+    /* 辅助色：马卡龙柔和系（低饱和） */
+    --color-secondary-pink: #F5C2D1; 
+    --color-secondary-purple: #D2B8D2; 
+    --color-secondary-yellow: #FAF0CC; 
+    
+    /* 文字色：层级更清晰 */
+    --color-text-main: #3A3A3A; /* 深灰（降低明度，更高级） */
+    --color-text-secondary: #707070; /* 中灰 */
+    --color-text-tertiary: #9A9A9A; /* 浅灰 */
+    --color-text-white: #FFFFFF; 
+    
+    /* 阴影：多层级 */
+    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 6px 18px rgba(0, 0, 0, 0.1);
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 头部主题 */
+.header {
+    background-color: var(--color-bg);
+    padding: 1.8rem 0;
+    border-bottom: 1px solid rgba(176, 216, 198, 0.3); /* 半透明边框 */
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    backdrop-filter: blur(8px); /* 毛玻璃效果 */
+}
+
+.studio-name {
+    color: var(--color-text-main);
+    font-size: 1.9rem;
+    font-weight: 600;
+    margin-left: 1.2rem;
+    background: linear-gradient(120deg, var(--color-primary), var(--color-secondary-purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* 渐变文字 */
+}
+
+/* 导航主题 */
+.nav-link {
+    color: var(--color-text-secondary);
+    padding: 0.6rem 1.2rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--color-primary-dark);
+    transform: translateY(-1px); /* 微位移 */
+}
+
+/* 按钮主题 */
+.primary-btn {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary-pink));
+    color: var(--color-text-white);
+    padding: 0.9rem 2.2rem;
+    border-radius: 2.5rem; /* 更大圆角 */
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: var(--shadow-light);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 缓动函数 */
+    position: relative;
+    overflow: hidden;
+}
+
+/* 按钮hover动效 */
+.primary-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.primary-btn:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px); /* 轻微上浮 */
+    background: linear-gradient(135deg, var(--color-primary-dark), var(--color-secondary-pink));
+}
+
+.primary-btn:hover::before {
+    left: 100%; /* 流光效果 */
+}
+
+/* 区块标题 */
+.section-title {
+    font-size: 2rem;
+    color: var(--color-text-main);
+    margin-bottom: 2.5rem;
+    text-align: center;
+    position: relative;
+    font-weight: 600;
+    letter-spacing: 0.5px; /* 细微字间距 */
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary-purple));
+    margin: 1rem auto;
+    border-radius: 3px;
+}
+
+/* 项目卡片主题 */
+.project-card {
+    background-color: var(--color-bg);
+    border-radius: 1.2rem;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+/* 卡片hover遮罩 */
+.project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.1);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-info {
+    padding: 1.8rem;
+}
+
+.project-name {
+    color: var(--color-text-main);
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+}
+
+.project-desc {
+    color: var(--color-text-tertiary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* 页脚主题 */
+.footer {
+    background: linear-gradient(180deg, var(--color-bg), var(--color-primary-light));
+    padding: 2.5rem 0;
+    margin-top: 5rem;
+    color: var(--color-text-secondary);
+    text-align: center;
+    border-top: 1px solid rgba(176, 216, 198, 0.2);
+}
+
+.copyright {
+    margin-bottom: 1.2rem;
+    font-size: 0.9rem;
+}
+
+.contact-link {
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+    color: var(--color-primary-dark);
+}

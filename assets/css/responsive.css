@@ -1,0 +1,113 @@
+/* 大屏电脑适配（>1200px） */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
+}
+
+/* 平板适配（768px - 1024px） */
+@media (max-width: 1024px) {
+    .hero-section {
+        padding: 4rem 0;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-slogan {
+        font-size: 1.2rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+/* 手机适配（<768px） */
+@media (max-width: 768px) {
+    /* 头部适配：导航堆叠 */
+    .header {
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 1.2rem 0;
+    }
+    
+    .nav-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.3rem;
+    }
+    
+    .nav-link {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    /* 英雄区适配：更紧凑 */
+    .hero-section {
+        padding: 3rem 0;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-slogan {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-desc {
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    /* 项目栅格：单列+优化间距 */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0;
+    }
+    
+    /* 按钮适配 */
+    .primary-btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.9rem;
+    }
+    
+    /* 标题适配 */
+    .section-title {
+        font-size: 1.7rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* 动效适配：移动端简化，提升性能 */
+    .animate-hover-scale:hover {
+        transform: translateY(-4px) scale(1.01);
+    }
+}
+
+/* 小屏手机（<480px） */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .studio-name {
+        font-size: 1.6rem;
+    }
+    
+    .logo {
+        width: 45px;
+        height: 45px;
+    }
+}
