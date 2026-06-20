@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云枢工作室 - 专注游戏研发</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 自定义光标（桌面端生效） -->
+    <div class="custom-cursor"></div>
+
+    <!-- 顶部导航栏 -->
+    <header class="navbar">
+        <div class="nav-container">
+            <!-- 左侧Logo -->
+            <a href="#home" class="nav-logo">云枢工作室</a>
+
+            <!-- 移动端汉堡菜单按钮 -->
+            <button class="hamburger" id="hamburger">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <!-- 右侧导航菜单 -->
+            <nav class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link">首页</a>
+                <a href="#about" class="nav-link">关于我们</a>
+                <a href="#works" class="nav-link">作品展示</a>
+                <a href="#contact" class="nav-link">联系方式</a>
+                <!-- 暗黑模式切换按钮 -->
+                <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- 首页首屏 Hero 区 -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">云枢工作室</h1>
+                <p class="hero-subtitle">云卷万象，枢定乾坤</p>
+                <p class="hero-desc">专注游戏研发，以玩家体验为核心，打磨有温度的游戏作品</p>
+                <div class="hero-buttons">
+                    <a href="#works" class="btn primary-btn">查看作品</a>
+                    <a href="#contact" class="btn secondary-btn">联系我们</a>
+                </div>
+            </div>
+            <!-- 背景：云纹渐变SVG占位 【替换为实际背景素材】 -->
+            <div class="hero-bg">
+                <svg viewBox="0 0 1920 1080" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="cloudGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#e0e8ec;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#d1e0e8;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="1920" height="1080" fill="url(#cloudGradient)" />
+                    <path d="M0,500 Q480,400 960,500 T1920,500 L1920,1080 L0,1080 Z" fill="#e8eff2" opacity="0.3"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- 首页-关于我们 云纹分隔过渡层 -->
+    <div class="section-divider"></div>
+
+        <!-- 关于我们板块 -->
+        <section id="about" class="about-section fade-section">
+            <div class="container">
+                <h2 class="section-title">关于我们</h2>
+                <div class="about-content">
+                    <p>云枢工作室是一家专注于独立研发的工作室，秉持「云卷万象，枢定乾坤」的创作理念，始终把玩家体验放在首位，拒绝浮躁快餐式创作，用心打磨每一款有温度、有质感的游戏作品。</p>
+                    <p>我们追求纯粹、良好的游戏体验，用匠心还原游戏最本真的乐趣。</p>
+                    <p class="recruit-tip">我们始终欢迎热爱游戏的同路人加入，详情可查看下方联系方式。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 作品展示板块 -->
+        <section id="works" class="works-section fade-section">
+            <div class="container">
+                <h2 class="section-title">我们的作品</h2>
+                <div class="works-grid">
+                    <!-- 作品卡片1 【所有内容替换为实际作品信息】 -->
+                    <div class="work-card">
+                        <!-- 作品封面占位图 【替换为实际作品封面】 -->
+                        <div class="work-cover">
+                            <svg viewBox="0 0 400 225" fill="none">
+                                <rect width="400" height="225" fill="#e0e8ec" rx="12"/>
+                                <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="#6b8b9e" font-size="16">作品封面占位</text>
+                            </svg>
+                        </div>
+                        <h3 class="work-title">作品名称占位</h3>
+                        <p class="work-desc">一句话简介占位 | 2D横版独立游戏</p>
+                        <div class="work-buttons">
+                            <a href="#" target="_blank" class="btn small-btn">Steam 下载</a>
+                            <a href="#" target="_blank" class="btn small-btn">TapTap 下载</a>
+                        </div>
+                    </div>
+
+                    <!-- 作品卡片2 【所有内容替换为实际作品信息】 -->
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <svg viewBox="0 0 400 225" fill="none">
+                                <rect width="400" height="225" fill="#e0e8ec" rx="12"/>
+                                <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="#6b8b9e" font-size="16">作品封面占位</text>
+                            </svg>
+                        </div>
+                        <h3 class="work-title">作品名称占位</h3>
+                        <p class="work-desc">一句话简介占位 | 2D横版独立游戏</p>
+                        <div class="work-buttons">
+                            <a href="#" target="_blank" class="btn small-btn">Steam 下载</a>
+                            <a href="#" target="_blank" class="btn small-btn">TapTap 下载</a>
+                        </div>
+                    </div>
+
+                    <!-- 作品卡片3 【所有内容替换为实际作品信息】 -->
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <svg viewBox="0 0 400 225" fill="none">
+                                <rect width="400" height="225" fill="#e0e8ec" rx="12"/>
+                                <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="#6b8b9e" font-size="16">作品封面占位</text>
+                            </svg>
+                        </div>
+                        <h3 class="work-title">作品名称占位</h3>
+                        <p class="work-desc">一句话简介占位 | 2D横版独立游戏</p>
+                        <div class="work-buttons">
+                            <a href="#" target="_blank" class="btn small-btn">Steam 下载</a>
+                            <a href="#" target="_blank" class="btn small-btn">TapTap 下载</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系方式板块 -->
+        <section id="contact" class="contact-section fade-section">
+            <div class="container">
+                <h2 class="section-title">联系方式</h2>
+                <div class="contact-grid">
+                    <!-- 商务合作 -->
+                    <div class="contact-card">
+                        <h3>商务合作</h3>
+                        <p>合作邮箱：<span>【替换为实际商务邮箱】</span></p>
+                        <div class="platform-icons">
+                            <!-- Steam图标 【链接替换为官方主页】 -->
+                            <a href="#" target="_blank">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                            </a>
+                            <!-- TapTap图标 【链接替换为官方主页】 -->
+                            <a href="#" target="_blank">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <rect x="5" y="5" width="14" height="14" rx="2"></rect>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 加入我们 -->
+                    <div class="contact-card">
+                        <h3>加入我们</h3>
+                        <p>热招岗位：<span>游戏程序 / 美术设计师 / 游戏策划</span></p>
+                        <p>投递邮箱：<span>【占位-实际招聘邮箱】</span></p>
+                        <p>期待热爱游戏的你，与我们一同创作！</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 底部页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 云枢工作室 保留所有权利</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

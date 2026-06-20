@@ -1,0 +1,613 @@
+/* ====================== 全局变量定义 ====================== */
+:root {
+    /* 浅色模式配色 - 雾霾蓝/浅灰青体系 */
+    --bg-primary: #f8fafb;
+    --bg-secondary: #ffffff;
+    --primary: #6b8b9e;
+    --primary-light: #d1e0e8;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --border-color: #e0e8ec;
+    --shadow: 0 4px 20px rgba(107, 139, 158, 0.08);
+    --shadow-hover: 0 8px 30px rgba(107, 139, 158, 0.12);
+
+    /* 通用样式 */
+    --radius: 12px;
+    --radius-large: 20px;
+    --transition: all 0.3s ease;
+    --transition-color: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 暗黑模式配色 */
+.dark {
+    --bg-primary: #1e242a;
+    --bg-secondary: #2a3138;
+    --primary: #8aa6b8;
+    --primary-light: #3a4a57;
+    --text-primary: #ecf0f1;
+    --text-secondary: #b0c4c1;
+    --border-color: #3a444d;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ====================== 基础重置 ====================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    transition: var(--transition-color);
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: var(--transition);
+    color: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ====================== 自定义光标 ====================== */
+.custom-cursor {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    border-radius: 50%;
+    opacity: 0.15;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    display: none;
+} 
+
+/* 桌面端显示光标 */
+@media (min-width: 1024px) {
+    .custom-cursor {
+        display: block;
+    }
+}
+
+/* ====================== 导航栏 ====================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 0;
+    transition: var(--transition);
+}
+
+/* 滚动后毛玻璃效果 */
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow);
+}
+
+.dark .navbar.scrolled {
+    background: rgba(30, 36, 42, 0.7);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.nav-link:hover {
+    color: var(--primary);
+}
+
+/* 主题切换按钮 */
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.theme-toggle.rotate {
+    transform: rotate(180deg);
+}
+
+/* 汉堡菜单 */
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+/* ====================== 通用按钮 ====================== */
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: var(--radius);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.primary-btn {
+    background: var(--primary);
+    color: white;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.secondary-btn {
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.secondary-btn:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.small-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.small-btn:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+/* ====================== Hero 区域 ====================== */
+.hero-section {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-bg svg {
+    width: 100%;
+    height: 100%;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    padding: 0 20px;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.hero-desc {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ====================== 通用板块样式 ====================== */
+.section-title {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 48px;
+    color: var(--text-primary);
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+.fade-section {
+    padding: 100px 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.fade-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ====================== 关于我们 ====================== */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+}
+
+.about-content p {
+    margin-bottom: 20px;
+}
+
+.recruit-tip {
+    color: var(--primary);
+    font-weight: 500;
+    margin-top: 30px;
+}
+
+/* ====================== 作品展示 ====================== */
+.works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.work-card {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-large);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+.work-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.work-cover {
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.work-cover svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.work-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.work-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+
+.work-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* ====================== 联系方式 ====================== */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-card {
+    background: var(--bg-secondary);
+    padding: 32px;
+    border-radius: var(--radius-large);
+    box-shadow: var(--shadow);
+}
+
+.contact-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+.contact-card p {
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.platform-icons {
+    display: flex;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.platform-icons a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+}
+
+.platform-icons a:hover {
+    transform: scale(1.1);
+}
+
+/* ====================== 页脚 ====================== */
+.footer {
+    padding: 30px 0;
+    text-align: center;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+/* ====================== 响应式适配 ====================== */
+/* 平板 */
+@media (max-width: 1024px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
+}
+
+/* 手机 */
+@media (max-width: 768px) {
+    /* 导航菜单折叠 */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 240px;
+        height: 100vh;
+        background: var(--bg-secondary);
+        flex-direction: column;
+        padding: 80px 20px 20px;
+        gap: 24px;
+        box-shadow: var(--shadow);
+        transition: right 0.3s ease;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .hamburger {
+        display: block;
+        z-index: 1001;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .section-title {
+        font-size: 1.7rem;
+    }
+
+    .fade-section {
+        padding: 70px 0;
+    }
+
+    .works-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 小屏手机 */
+@media (max-width: 480px) {
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 80%;
+    }
+}
+
+/* ====================== 性能优化版：双主题鼠标拖尾 + 涟漪 ====================== */
+/* 基础节点：纯transform定位，强制GPU合成层，无任何触发重排的属性 */
+.trail-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px; /* 日间基准头部尺寸，黑夜模式自动覆盖 */
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  /* 【优化】提前声明合成层，交由GPU渲染，降低主线程压力 */
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0) scale(1);
+  transform-origin: center center;
+  /* 仅透明度做过渡，transform由JS逐帧控制，避免过渡冲突 */
+  transition: opacity 0.2s ease;
+}
+
+/* 日间模式：静态柔边羽化，动画帧绝不修改filter，避免每帧滤镜重绘 */
+.trail-dot {
+  background: var(--primary);
+  filter: blur(0.5px);
+}
+
+/* 黑夜模式：增强光晕，静态羽化半径，主题切换自动适配 */
+.dark .trail-dot {
+  width: 25px;
+  height: 25px;
+  background: radial-gradient(circle, #ecf0f1 0%, transparent 70%);
+  filter: blur(4px);
+}
+
+/* 悬停交互反馈：仅修改透明度，尺寸由scale控制 */
+.trail-dot.trail-hover {
+  opacity: 0.55 !important;
+}
+
+/* 点击涟漪：纯transform定位，CSS变量驱动动画，无left/top重排 */
+.trail-ripple {
+  --scale: 0.5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle, transparent 30%, var(--primary) 50%, transparent 70%);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translate3d(var(--x), var(--y), 0) translate(-50%, -50%) scale(var(--scale));
+  animation: rippleExpand 0.4s ease-out forwards;
+}
+
+@keyframes rippleExpand {
+  0% { opacity: 0.2; --scale: 0.5; }
+  100% { opacity: 0; --scale: 2; }
+}
+
+/* 移动端/触摸设备完全禁用 */
+@media (max-width: 1023px), (pointer: coarse) {
+  .trail-dot, .trail-ripple { display: none !important; }
+}
+
+/* ====================== 首页-关于我们 云纹弧形分隔过渡层 ====================== */
+.section-divider {
+  position: relative;
+  width: 100%;
+  /* 响应式高度 */
+  height: 140px;
+  /* 平缓云纹圆弧（居中单峰） */
+  clip-path: path("M0,140 Q960,95 1920,140 L1920,0 L0,0 Z");
+  /* 渐变衔接：Hero背景 → 关于我们背景 */
+  background: linear-gradient(to bottom, var(--bg-primary) 15%, var(--bg-secondary) 85%, var(--bg-secondary) 100%);
+  transition: background 0.3s ease;
+  overflow: hidden;
+}
+/* 黑夜模式专项优化 */
+.dark .section-divider {
+  background: linear-gradient(to bottom, var(--bg-primary) 7.5%, var(--bg-secondary) 92.5%);
+  box-shadow: inset 0 1px 0 rgba(138, 166, 184, 0.05);
+}
+/* 平板适配 */
+@media (max-width: 1024px) {
+  .section-divider {
+    height: 120px;
+    clip-path: path("M0,120 Q960,85 1920,120 L1920,0 L0,0 Z");
+  }
+}
+/* 手机适配 */
+@media (max-width: 768px) {
+  .section-divider {
+    height: 100px;
+    clip-path: path("M0,100 Q960,75 1920,100 L1920,0 L0,0 Z");
+  }
+}
+/* 浏览器降级兼容 */
+@supports not (clip-path: path("")) {
+  .section-divider {
+    clip-path: ellipse(100% 50% at top center);
+  }
+}
