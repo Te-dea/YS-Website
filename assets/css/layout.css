@@ -1,0 +1,122 @@
+/* 头部布局 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 52px;
+    height: 52px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: rotate(5deg) scale(1.05); /* 微旋转+缩放 */
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem; /* 统一间距，提升排版整洁度 */
+}
+
+/* 英雄区布局 */
+.hero-section {
+    display: flex;
+    flex-direction: column; /* 单列布局，更聚焦文字 */
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 0;
+    text-align: center;
+    gap: 1.5rem;
+    position: relative;
+}
+
+/* 英雄区装饰 */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, var(--color-primary-light) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+    z-index: -1;
+    border-radius: 50%;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 800px; /* 限制宽度 */
+}
+
+.hero-title {
+    font-size: 3rem;
+    margin-bottom: 1.2rem;
+    color: var(--color-text-main);
+    font-weight: 700;
+    line-height: 1.2; /* 紧凑行高 */
+}
+
+/* Slogan样式 */
+.hero-slogan {
+    font-size: 1.3rem;
+    color: var(--color-primary-dark);
+    margin-bottom: 2.5rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.5s forwards;
+}
+
+.hero-desc {
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 3rem;
+    line-height: 1.8;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 项目栅格布局 */
+:root {
+    --project-card-min-width: 320px;
+    --project-grid-gap: 2.5rem;
+    --project-card-border-radius: 1.2rem;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--project-card-min-width), 1fr));
+    gap: var(--project-grid-gap);
+    padding: 1rem 0;
+}
+
+/* 项目卡片基础结构（抽离到layout，统一控制） */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* 保证卡片等高 */
+}
+
+.project-img {
+    width: 100%;
+    height: 200px; /* 统一图片高度，提升整洁度 */
+    object-fit: cover; /* 防止图片变形 */
+    border-radius: var(--project-card-border-radius) var(--project-card-border-radius) 0 0;
+}
+
+.project-info {
+    flex: 1; /* 让信息区自动填充剩余高度 */
+    display: flex;
+    flex-direction: column;
+}

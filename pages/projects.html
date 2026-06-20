@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="游戏项目 - 云枢工作室，云卷万象，枢定乾坤 | 原创独立游戏展示">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; connect-src 'self';">
+    <title>游戏项目 - 云枢工作室</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- 按优先级引入CSS，保持结构清晰 -->
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/animation.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <header class="header container">
+        <div class="logo-wrapper">
+            <h1 class="studio-name animate-slide-in animate-text-reveal">云枢工作室</h1>
+        </div>
+        <nav class="nav-menu">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="./index.html" class="nav-link">首页</a></li>
+                <li class="nav-item"><a href="./about.html" class="nav-link">关于我们</a></li>
+                <li class="nav-item"><a href="./projects.html" class="nav-link">游戏项目</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main container">
+        <section class="projects-section" style="padding: 4rem 0;">
+            <h3 class="section-title animate-fade-in animate-text-reveal">全部游戏项目</h3>
+            <!-- 项目栅格：统一结构，添加data属性存储游戏ID，方便跳转 -->
+            <div class="projects-grid" id="projectsGrid">
+                <!-- 游戏1：像素冒险记 -->
+                <div class="project-card animate-hover-scale" data-game-id="pixel-adventure">
+                    <img src="../assets/images/game-1.jpg" alt="像素冒险记" class="project-img">
+                    <div class="project-info">
+                        <h4 class="project-name">像素冒险记</h4>
+                        <p class="project-desc">2D像素风冒险游戏，全平台适配，轻量化设计，丰富的剧情与关卡</p>
+                    </div>
+                </div>
+                <!-- 游戏2：节奏方块 -->
+                <div class="project-card animate-hover-scale" data-game-id="rhythm-block">
+                    <img src="../assets/images/game-2.jpg" alt="节奏方块" class="project-img">
+                    <div class="project-info">
+                        <h4 class="project-name">节奏方块</h4>
+                        <p class="project-desc">休闲节奏类游戏，简单易上手，治愈系画风，多种难度可选</p>
+                    </div>
+                </div>
+                <!-- 游戏3：星空跳跃 -->
+                <div class="project-card animate-hover-scale" data-game-id="star-jump">
+                    <img src="../assets/images/game-3.jpg" alt="星空跳跃" class="project-img">
+                    <div class="project-info">
+                        <h4 class="project-name">星空跳跃</h4>
+                        <p class="project-desc">竖版休闲小游戏，唯美马卡龙画风，解压神器，无广告无内购</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer container animate-fade-in">
+        <p class="copyright">© 2026 云枢工作室 - 保留所有权利</p>
+        <div class="contact">
+            <a href="#" class="contact-link">邮箱：xxx@example.com</a>
+        </div>
+    </footer>
+
+    <!-- 抽离项目交互逻辑到单独JS，保持页面整洁 -->
+    <script src="../assets/js/utils.js" defer></script>
+    <script src="../assets/js/security.js" defer></script>
+    <script src="../assets/js/interaction.js" defer></script>
+    <script src="../assets/js/project-actions.js" defer></script>
+</body>
+</html>
